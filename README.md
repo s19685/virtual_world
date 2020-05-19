@@ -1,2 +1,5 @@
 # virtual_world
-virtual_world with A-frame
+virtual world with A-frame
+
+hosted on glitch
+https://envijapan.glitch.me
