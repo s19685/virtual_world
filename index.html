@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ENV01</title>
+    <meta name="description" content="environment01">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://rawgit.com/takahirox/aframe-rain/master/build/aframe-rain.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
+  </head>
+  <body>
+    <a-scene rain="splashGravity:0.8; dropRadius:0.01" background="color: #FAFAFA" >
+      <a-entity position="0 2.25 -15" particle-system="color: #EF0000,#44CC00"></a-entity>
+      <a-entity id="contener"></a-entity>
+      <a-entity environment="preset: japan; groundColor: #4e0252; grid: cross; skyColor:#380161"></a-entity>
+      <a-entity light="type: spot; angle: 180; color:purple; intensity:8.0"position="-5 1 -7"></a-entity>
+      <a-entity light="type: spot; angle: 180; color:purple; intensity:8.0"position="-5 1 7"></a-entity>
+      <a-entity light="type: spot; angle: 180; color:white; intensity:2.0"position="5 1 0"></a-entity>
+      <a-entity ocean="density: 50; width: 200; depth: 200; speed: 2" material="color: #9CE3F9; opacity: 0.75; metalness: 0; roughness: 1" rotation="-90 0 0" position="0 1 0"></a-entity>
+    </a-scene>
+  </body>
+  <script type="module">
+      var x, y, z, angle, size;
+      var contener = document.querySelector('#contener');
+
+      for (var i = 0; i < 50; i++) {
+        x = Math.floor(Math.random()*2) == 1  ? Math.random() * -50 : Math.random() * 90;
+        y = 5 + Math.random() * 20;
+        z =  Math.floor(Math.random()*2) == 1 ? Math.random() * -90 : Math.random() * 20;
+        angle = i % 2 == 0 ? 360 : -360;
+        size = 2 + Math.random() * 3;
+
+        contener.innerHTML +=
+        `<a-entity animation="dur: 5000; property: rotation; easing: linear; loop: true"
+                   scale="${size} ${size} ${size}"
+                   geometry="primitive:torusKnot"
+                   position="${x} ${y} ${z}"
+                   material="color:magenta;metalness:1;roughness:0.1;sphericalEnvMap:https://img.gs/bbdkhfbzkk/2048x2048,stretch/http://i.imgur.com/WqlqEkq.jpg"
+                   rotation="${angle} ${-angle} ${angle}">
+        </a-entity>`;
+      }
+  </script>
+</html>
